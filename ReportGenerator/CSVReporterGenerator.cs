@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReportGeneratorLibrary;
+namespace ReportGenerator;
 
-public class ReportGenerator
+public class CSVReporterGenerator : IReportGenerator
 {
     public List<Dictionary<string, string>> Input { get; set; }
-    
-    public ReportGenerator(List<Dictionary<string, string>> input)
+    public string Title { get; set; }
+    public string HeadLine { get; set; }
+    public string FooterLine { get; set; }
+
+    public CSVReporterGenerator(List<Dictionary<string, string>> input)
     {
         Input = input;
     }
@@ -19,7 +22,18 @@ public class ReportGenerator
             throw new Exception("Input de dados invalido");
 
         StringBuilder report = new StringBuilder();
-        
+
+        if(!string.IsNullOrWhiteSpace(Title))
+        {
+            report.AppendLine(Title);
+            report.AppendLine("");
+        }
+        if(!string.IsNullOrWhiteSpace(HeadLine))
+        {
+            report.AppendLine(HeadLine);
+            report.AppendLine("");
+        }
+
         string header = string.Join(";", Input.First().Keys);
         report.AppendLine(header);
 
@@ -27,6 +41,12 @@ public class ReportGenerator
         {
             string line = string.Join(";", record.Values);
             report.AppendLine(line);
+        }
+
+        if (!string.IsNullOrWhiteSpace(FooterLine))
+        {
+            report.AppendLine("");
+            report.AppendLine(FooterLine);
         }
 
         File.WriteAllText("report.csv", report.ToString());

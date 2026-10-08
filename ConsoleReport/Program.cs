@@ -1,4 +1,4 @@
-﻿using ReportGeneratorLibrary;
+﻿using ReportGenerator;
 
 List<Dictionary<string, string>> data = new()
 {
@@ -23,6 +23,9 @@ List<Dictionary<string, string>> data = new()
 };
 
 
-ReportGenerator reportGenerator = new ReportGenerator(data);
-var caminhoDoArquivo = reportGenerator.GenerateReport();
+CSVReporterGenerator reporterGenerator = new CSVReporterGenerator(data);
+reporterGenerator.Title = "Relatório de Pessoas";
+reporterGenerator.HeadLine = "Lista de pessoas cadastradas no sistema";
+reporterGenerator.FooterLine = "Total de pessoas: " + data.Count;
+var caminhoDoArquivo = reporterGenerator.GenerateReport();
 Console.WriteLine($"O relatório foi gerado em: {caminhoDoArquivo}");
