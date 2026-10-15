@@ -4,6 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>ReportGenerator</Title>
+    <Version>1.0.0</Version>
+    <Authors>Kawan Bastos</Authors>
+    <Company>Kawan Bastos</Company>
+    <Product>ReportGenerator</Product>
   </PropertyGroup>
 
 </Project>
